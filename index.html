@@ -6,48 +6,95 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      padding: 20px;
       background: #fff;
       color: #b00020;
+      padding: 30px;
+      line-height: 1.8;
+      letter-spacing: 0.7px;
     }
     h1 {
+      font-size: 2.5em;
       color: #b00020;
+      margin-bottom: 30px;
     }
     .email-box {
-      margin-bottom: 20px;
+      font-size: 1.2em;
+      margin-bottom: 30px;
     }
     .email {
       font-weight: bold;
-      font-size: 1.2em;
+      font-size: 1.4em;
+      color: #000;
     }
     button {
       background-color: #b00020;
       color: white;
-      padding: 10px 15px;
+      padding: 12px 20px;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
+      font-size: 1em;
       cursor: pointer;
+      margin-left: 10px;
     }
     button:hover {
       background-color: #d32f2f;
     }
     .message {
       background: #ffe6e6;
-      margin-top: 10px;
-      padding: 10px;
+      margin-top: 15px;
+      padding: 15px;
       border: 1px solid #d32f2f;
-      border-radius: 5px;
+      border-radius: 8px;
     }
     pre {
       background: #fff0f0;
-      padding: 10px;
-      border-radius: 5px;
+      padding: 12px;
+      border-radius: 6px;
       overflow-x: auto;
     }
-    .copyright {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #888;
+    .footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 0.95em;
+      color: #555;
+    }
+    .socials h3 {
+      text-align: center;
+      color: #000;
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 1.3em;
+    }
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .social-icons img {
+      width: 80px;
+      height: auto;
+      transition: transform 0.2s ease;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 5px #b00020;
+      }
+      50% {
+        box-shadow: 0 0 20px #b00020;
+      }
+      100% {
+        box-shadow: 0 0 5px #b00020;
+      }
+    }
+
+    .social-icons img:hover {
+      transform: scale(1.05);
+      animation: glow 1s infinite;
     }
   </style>
 </head>
@@ -59,68 +106,62 @@
   </div>
   <div id="messages"></div>
 
-  <div class="copyright">
-    Ce site est privé. Tous droits réservés © 2025.  
+  <div class="socials">
+    <h3>Follow us</h3>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/j.m.h.2024" target="_blank">
+        <img src="https://files.catbox.moe/iyvf7v.jpg" alt="Instagram">
+      </a>
+      <a href="https://whatsapp.com/channel/0029Vb6J7O684Om8DdNfvL2N" target="_blank">
+        <img src="https://files.catbox.moe/m4e976.jpg" alt="WhatsApp">
+      </a>
+    </div>
   </div>
 
-  <!-- Script protégé et signé Marc-Tech -->
-  <script>
-    // Anti-inspection console
-    setInterval(function () {
-      const before = new Date();
-      debugger;
-      const after = new Date();
-      if (after - before > 100) {
-        alert("Inspection détectée. Ce script appartient à Marc-Tech.");
-        window.location.href = "about:blank";
-      }
-    }, 1000);
+  <div class="footer">
+    Tous droits réservés © 2025 - Marc-Tech
+  </div>
 
-    // Script fortement obfusqué signé Marc-Tech
+  <!-- Script sécurisé et obfusqué -->
+  <script>
     (function(){
-      const _0x1a3b = [
+      const $ = [
         "random","substring","@mailsac.com","getElementById","textContent","messages","length","innerHTML","<p>Aucun message pour l'instant.</p>","forEach","createElement","className","message",
         "<p><strong>De :</strong> ","from","</p><p><strong>Sujet :</strong> ","subject","</p><button onclick=\"r('","_id','')\">Lire</button><div id=\"body-","body-","appendChild",
-        "headers","Mailsac-Key","k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537","then","json","fetch","/api/addresses/","/messages","g","text","pre","Marc-Tech © 2025","log"
+        "headers","Mailsac-Key","k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537","then","json","fetch","/api/addresses/","/messages","g","text","pre"
       ];
-      let email = function(){return Math[_0x1a3b[0]]().toString(36)[_0x1a3b[1]](2,10)+_0x1a3b[2];};
-      let mail = email();
-      document[_0x1a3b[3]]("emailDisplay")[_0x1a3b[4]] = mail;
+      let e = ()=>Math[$[0]]().toString(36)[$[1]](2,10)+$[2];
+      let m = e();
+      document[$[3]]("emailDisplay")[$[4]] = m;
 
-      console[_0x1a3b[36]](_0x1a3b[35]);
-
-      window[_0x1a3b[30]] = function(){
-        fetch("https://mailsac.com"+_0x1a3b[29]+mail+_0x1a3b[30], {
-          [_0x1a3b[21]]: {
-            [_0x1a3b[22]]: _0x1a3b[23]
-          }
-        })[_0x1a3b[24]](_0x1a3b[25])[_0x1a3b[24]](msgs => {
-          let c = document[_0x1a3b[3]]("messages");
-          c[_0x1a3b[7]] = "";
-          if (!msgs[_0x1a3b[6]]) {
-            c[_0x1a3b[7]] = _0x1a3b[8];
+      window[$[30]] = function(){
+        fetch("https://mailsac.com"+$[29]+m+$[30], {
+          [$[21]]: { [$[22]]: $[23] }
+        })[$[24]]($[25])[$[24]](msgs => {
+          let c = document[$[3]]("messages");
+          c[$[7]] = "";
+          if (!msgs[$[6]]) {
+            c[$[7]] = $[8];
             return;
           }
-          msgs[_0x1a3b[9]](msg => {
-            let d = document[_0x1a3b[10]]("div");
-            d[_0x1a3b[11]] = _0x1a3b[12];
-            d[_0x1a3b[7]] = _0x1a3b[13] + msg[_0x1a3b[14]] + _0x1a3b[15] + msg[_0x1a3b[16]] + _0x1a3b[17] + msg[_0x1a3b[18]] + _0x1a3b[19];
-            c[_0x1a3b[20]](d);
+          msgs[$[9]](msg => {
+            let d = document[$[10]]("div");
+            d[$[11]] = $[12];
+            d[$[7]] = $[13]+msg[$[14]]+$[15]+msg[$[16]]+$[17]+msg[$[18]]+$[19];
+            c[$[20]](d);
           });
         });
       };
 
-      window.r = function(id){
-        fetch(`https://mailsac.com/api/text/${mail}/${id}`, {
-          [_0x1a3b[21]]: {
-            [_0x1a3b[22]]: _0x1a3b[23]
-          }
-        })[_0x1a3b[24]](_0x1a3b[31])[_0x1a3b[24]](txt => {
-          document[_0x1a3b[3]](_0x1a3b[19]+id)[_0x1a3b[7]] = `<${_0x1a3b[32]}>`+txt+`</${_0x1a3b[32]}>`;
+      window.r = function(i){
+        fetch(`https://mailsac.com/api/text/${m}/${i}`, {
+          [$[21]]: { [$[22]]: $[23] }
+        })[$[24]]($[31])[$[24]](txt => {
+          document[$[3]]($[19]+i)[$[7]] = `<${$[32]}>${txt}</${$[32]}>`;
         });
       };
     })();
   </script>
 </body>
   </html>
-  
+          
