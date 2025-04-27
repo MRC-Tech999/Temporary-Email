@@ -4,64 +4,31 @@
   <meta charset="UTF-8">
   <title>Temporary Email - MARC-Tech</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      background: #f4f4f4;
-      color: #333;
-    }
-    .email-box {
-      margin-bottom: 20px;
-      background: #fff;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .email {
-      font-weight: bold;
-      color: #007bff;
-    }
-    button {
-      padding: 10px 15px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    .message {
-      background: white;
-      margin-top: 10px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-    .footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 12px;
-      color: #777;
-    }
+    body{font-family:Arial,sans-serif;padding:20px;background:#f4f4f4;color:#333}.email-box{margin-bottom:20px;background:#fff;padding:10px;border-radius:5px;box-shadow:0 2px 4px rgba(0,0,0,0.1)}.email{font-weight:bold;color:#007bff}button{padding:10px 15px;background-color:#007bff;color:white;border:none;border-radius:5px;cursor:pointer;font-size:14px}button:hover{background-color:#0056b3}.message{background:white;margin-top:10px;padding:10px;border:1px solid #ccc;border-radius:5px;box-shadow:0 1px 3px rgba(0,0,0,0.1)}.footer{margin-top:40px;text-align:center;font-size:12px;color:#777}.social-links{display:flex;justify-content:center;margin-top:20px}.social-links a{margin:0 10px;display:block;width:40px;height:40px}.social-links img{width:100%;height:100%}
   </style>
 </head>
 <body>
   <h1>Temp Mail (via Mailsac)</h1>
-  
+
   <div class="email-box">
     <p>Votre email temporaire : <span class="email" id="emailDisplay"></span></p>
     <button onclick="getMessages()">Actualiser</button>
     <button onclick="copyEmail()">Copier l'email</button>
   </div>
-  
+
   <div id="messages"></div>
-  
+
   <div class="footer">
     <p>&copy; Marc-Tech 2025 - Tous droits réservés.</p>
+    <p>Suivez-nous :</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/j.m.h.2024" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+      </a>
+      <a href="https://whatsapp.com/channel/0029Vb6J7O684Om8DdNfvL2N" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      </a>
+    </div>
   </div>
 
   <script>
@@ -123,4 +90,5 @@
     }
   </script>
 </body>
-</html>
+  </html>
+  
