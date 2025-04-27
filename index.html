@@ -8,16 +8,13 @@
   </style>
 </head>
 <body>
-  <h1>Temp Mail (via Mailsac)</h1>
-
+  <h1>Temp Mail (via Marc-Tech)</h1>
   <div class="email-box">
     <p>Votre email temporaire : <span class="email" id="emailDisplay"></span></p>
-    <button onclick="getMessages()">Actualiser</button>
-    <button onclick="copyEmail()">Copier l'email</button>
+    <button onclick="gM()">Actualiser</button>
+    <button onclick="cE()">Copier l'email</button>
   </div>
-
   <div id="messages"></div>
-
   <div class="footer">
     <p>&copy; Marc-Tech 2025 - Tous droits réservés.</p>
     <p>Suivez-nous :</p>
@@ -30,65 +27,8 @@
       </a>
     </div>
   </div>
-
   <script>
-    const apiKey = 'k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537';
-    let tempEmail = generateEmail();
-
-    document.getElementById("emailDisplay").textContent = tempEmail;
-
-    function generateEmail() {
-      const random = Math.random().toString(36).substring(2, 10);
-      return `${random}@mailsac.com`;
-    }
-
-    function getMessages() {
-      fetch(`https://mailsac.com/api/addresses/${tempEmail}/messages`, {
-        headers: { 'Mailsac-Key': apiKey }
-      })
-      .then(res => res.json())
-      .then(messages => {
-        const container = document.getElementById("messages");
-        container.innerHTML = "";
-
-        if (!messages.length) {
-          container.innerHTML = "<p>Aucun message pour l'instant.</p>";
-          return;
-        }
-
-        messages.forEach(msg => {
-          const div = document.createElement("div");
-          div.className = "message";
-          div.innerHTML = `
-            <p><strong>De :</strong> ${msg.from}</p>
-            <p><strong>Sujet :</strong> ${msg.subject}</p>
-            <button onclick="readMessage('${msg._id}')">Lire</button>
-            <div id="body-${msg._id}"></div>
-          `;
-          container.appendChild(div);
-        });
-      });
-    }
-
-    function readMessage(id) {
-      fetch(`https://mailsac.com/api/text/${tempEmail}/${id}`, {
-        headers: { 'Mailsac-Key': apiKey }
-      })
-      .then(res => res.text())
-      .then(body => {
-        document.getElementById(`body-${id}`).innerHTML = `<pre>${body}</pre>`;
-      });
-    }
-
-    function copyEmail() {
-      const email = document.getElementById("emailDisplay").textContent;
-      navigator.clipboard.writeText(email).then(() => {
-        alert("L'email a été copié dans le presse-papiers !");
-      }).catch(err => {
-        console.error('Erreur lors de la copie de l\'email: ', err);
-      });
-    }
+    const aK='k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537';let tE=gE();document.getElementById("emailDisplay").textContent=tE;function gE(){const r=Math.random().toString(36).substring(2,10);return `${r}@mailsac.com`}function gM(){fetch(`https://mailsac.com/api/addresses/${tE}/messages`,{headers:{'Mailsac-Key':aK}}).then(res=>res.json()).then(m=>{const c=document.getElementById("messages");c.innerHTML="";if(!m.length){c.innerHTML="<p>Aucun message pour l'instant.</p>";return}m.forEach(m=>{const d=document.createElement("div");d.className="message";d.innerHTML=`<p><strong>De :</strong> ${m.from}</p><p><strong>Sujet :</strong> ${m.subject}</p><button onclick="rM('${m._id}')">Lire</button><div id="body-${m._id}"></div>`;c.appendChild(d)})})}function rM(i){fetch(`https://mailsac.com/api/text/${tE}/${i}`,{headers:{'Mailsac-Key':aK}}).then(res=>res.text()).then(b=>{document.getElementById(`body-${i}`).innerHTML=`<pre>${b}</pre>`})}function cE(){const e=document.getElementById("emailDisplay").textContent;navigator.clipboard.writeText(e).then(()=>{alert("L'email a été copié dans le presse-papiers !")}).catch(err=>{console.error('Erreur lors de la copie de l\'email: ',err)})}
   </script>
 </body>
-  </html>
-  
+</html>
