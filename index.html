@@ -4,123 +4,7 @@
   <meta charset="UTF-8">
   <title>Temporary Email - Marc-Tech</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff;
-      color: #b00020;
-      padding: 30px;
-      line-height: 1.8;
-      letter-spacing: 0.7px;
-    }
-    h1 {
-      font-size: 2.5em;
-      color: #b00020;
-      margin-bottom: 30px;
-      animation: titleAnimation 4s infinite; /* Animation du titre */
-    }
-    @keyframes titleAnimation {
-      0% {
-        color: #b00020;
-        transform: translateX(0);
-      }
-      25% {
-        color: #d32f2f;
-        transform: translateX(10px);
-      }
-      50% {
-        color: #f44336;
-        transform: translateX(-10px);
-      }
-      75% {
-        color: #c2185b;
-        transform: translateX(10px);
-      }
-      100% {
-        color: #b00020;
-        transform: translateX(0);
-      }
-    }
-
-    .email-box {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-    .email {
-      font-weight: bold;
-      font-size: 1.4em;
-      color: #000;
-    }
-    button {
-      background-color: #b00020;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1em;
-      cursor: pointer;
-      margin-left: 10px;
-    }
-    button:hover {
-      background-color: #d32f2f;
-    }
-    .message-box {
-      background: #ffe6e6;
-      margin-top: 15px;
-      padding: 15px;
-      border: 1px solid #d32f2f;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 800px;
-      margin-bottom: 20px;
-    }
-    .message-box h4 {
-      margin: 0;
-      color: #b00020;
-    }
-    .message-box p {
-      margin: 10px 0;
-      color: #555;
-    }
-    .message-box button {
-      background-color: #008CBA;
-    }
-    .message-box button:hover {
-      background-color: #005f73;
-    }
-
-    pre {
-      background: #fff0f0;
-      padding: 12px;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-    .footer {
-      margin-top: 50px;
-      text-align: center;
-      font-size: 0.95em;
-      color: #555;
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .social-icons img {
-      width: 80px;
-      height: auto;
-      transition: transform 0.2s ease;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    }
-
-    .social-icons img:hover {
-      transform: scale(1.05);
-    }
+    /* Ajoute tes styles ici... */
   </style>
 </head>
 <body>
@@ -130,25 +14,11 @@
   <div class="email-box">
     Votre email temporaire : <span class="email" id="emailDisplay"></span>
     <button onclick="copyEmail()">Copier l'email</button>
+    <button onclick="g()">Actualiser</button> <!-- Lien avec la fonction g -->
   </div>
 
   <!-- Messages section (inbox) -->
   <div id="messages"></div>
-
-  <!-- Social Media Logos -->
-  <div class="socials">
-    <h3>Follow us on Social Media</h3>
-    <div class="social-icons">
-      <!-- Instagram Logo -->
-      <a href="https://www.instagram.com/j.m.h.2024" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-      </a>
-      <!-- WhatsApp Logo -->
-      <a href="https://whatsapp.com/channel/0029Vb6J7O684Om8DdNfvL2N" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-      </a>
-    </div>
-  </div>
 
   <div class="footer">
     Tous droits réservés © 2025 - Marc-Tech
@@ -158,9 +28,9 @@
   <script>
     (function(){
       const $ = [
-        "random","substring","@mailsac.com","getElementById","textContent","messages","length","innerHTML","<p>Aucun message pour l'instant.</p>","forEach","createElement","className","message",
-        "<p><strong>De :</strong> ","from","</p><p><strong>Sujet :</strong> ","subject","</p><button onclick=\"r('","_id','')\">Lire</button><div id=\"body-","body-","appendChild",
-        "headers","Mailsac-Key","k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537","then","json","fetch","/api/addresses/","/messages","g","text","pre"
+        "random", "substring", "@mailsac.com", "getElementById", "textContent", "messages", "length", "innerHTML", "<p>Aucun message pour l'instant.</p>", "forEach", "createElement", "className", "message",
+        "<p><strong>De :</strong> ", "from", "</p><p><strong>Sujet :</strong> ", "subject", "</p><button onclick=\"r('", "_id", "')\">Lire</button><div id=\"body-", "body-", "appendChild",
+        "headers", "Mailsac-Key", "k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537", "then", "json", "fetch", "/api/addresses/", "/messages", "g", "text", "pre"
       ];
       let e = () => Math[$[0]]().toString(36)[$[1]](2, 10) + $[2];
       let m = e();
@@ -171,19 +41,19 @@
           [$[21]]: { [$[22]]: $[23] }
         })[$[24]]($[25])[$[24]](msgs => {
           let c = document[$[3]]("messages");
-          c[$[7]] = "";
+          c[$[7]] = "";  // Clear the current messages
           if (!msgs[$[6]]) {
-            c[$[7]] = $[8];
+            c[$[7]] = $[8];  // Display "No messages yet" message
             return;
           }
           msgs[$[9]](msg => {
             let d = document[$[10]]("div");
             d[$[11]] = $[12];
             d[$[7]] = `<div class="message-box">
-                         <h4>De : ${msg[$[14]]}</h4>
-                         <p>Sujet : ${msg[$[16]]}</p>
-                         <button onclick="r('${msg[$[18]]}')">Lire</button>
-                       </div>`;
+                          <h4>De : ${msg[$[14]]}</h4>
+                          <p>Sujet : ${msg[$[16]]}</p>
+                          <button onclick="r('${msg[$[18]]}')">Lire</button>
+                        </div>`;
             c[$[20]](d);
           });
         });
@@ -211,5 +81,4 @@
     })();
   </script>
 </body>
-  </html>
-          
+</html>
