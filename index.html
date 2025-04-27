@@ -58,28 +58,25 @@
       font-size: 0.95em;
       color: #555;
     }
-    .socials h3 {
-      text-align: center;
-      color: #000;
-      margin-bottom: 10px;
-      font-weight: 600;
-      font-size: 1.3em;
-    }
-    .social-icons {
+    
+    /* Nouveau style pour les logos */
+    .logo {
       display: flex;
-      gap: 20px;
       align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-    }
-    .social-icons img {
-      width: 80px;
-      height: auto;
-      transition: transform 0.2s ease;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #b00020; /* Définir la couleur du texte */
+      text-decoration: none;
     }
 
+    .logo-icon {
+      color: #b00020;
+      font-size: 1.8rem;
+      animation: pulse 2s infinite; /* Animation pour pulser */
+    }
+
+    /* Animation glow */
     @keyframes glow {
       0% {
         box-shadow: 0 0 5px #b00020;
@@ -92,9 +89,38 @@
       }
     }
 
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .social-icons img {
+      width: 80px;
+      height: auto;
+      transition: transform 0.2s ease;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+
+    /* Animation de survol pour l'effet glow */
     .social-icons img:hover {
       transform: scale(1.05);
       animation: glow 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
     }
   </style>
 </head>
@@ -109,11 +135,15 @@
   <div class="socials">
     <h3>Follow us</h3>
     <div class="social-icons">
-      <a href="https://www.instagram.com/j.m.h.2024" target="_blank">
-        <img src="https://files.catbox.moe/iyvf7v.jpg" alt="Instagram">
+      <!-- Instagram Logo -->
+      <a href="https://www.instagram.com/j.m.h.2024" target="_blank" class="logo">
+        <img src="https://files.catbox.moe/iyvf7v.jpg" alt="Instagram" class="logo-icon">
+        Instagram
       </a>
-      <a href="https://whatsapp.com/channel/0029Vb6J7O684Om8DdNfvL2N" target="_blank">
-        <img src="https://files.catbox.moe/m4e976.jpg" alt="WhatsApp">
+      <!-- WhatsApp Logo -->
+      <a href="https://whatsapp.com/channel/0029Vb6J7O684Om8DdNfvL2N" target="_blank" class="logo">
+        <img src="https://files.catbox.moe/m4e976.jpg" alt="WhatsApp" class="logo-icon">
+        WhatsApp
       </a>
     </div>
   </div>
@@ -163,5 +193,5 @@
     })();
   </script>
 </body>
-  </html>
-          
+    </html>
+  
