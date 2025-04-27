@@ -2,83 +2,125 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Temporary Email - Marc-Tech</title>
+  <title>Temporary Email - MARC-Tech</title>
   <style>
-    /* Ajoute tes styles ici... */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+      color: #333;
+    }
+    .email-box {
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .email {
+      font-weight: bold;
+      color: #007bff;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .message {
+      background: white;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+    }
   </style>
 </head>
 <body>
-  <h1>Temporary Email</h1>
+  <h1>Temp Mail (via Mailsac)</h1>
   
-  <!-- Email box with copy button -->
   <div class="email-box">
-    Votre email temporaire : <span class="email" id="emailDisplay"></span>
+    <p>Votre email temporaire : <span class="email" id="emailDisplay"></span></p>
+    <button onclick="getMessages()">Actualiser</button>
     <button onclick="copyEmail()">Copier l'email</button>
-    <button onclick="g()">Actualiser</button> <!-- Lien avec la fonction g -->
   </div>
-
-  <!-- Messages section (inbox) -->
+  
   <div id="messages"></div>
-
+  
   <div class="footer">
-    Tous droits réservés © 2025 - Marc-Tech
+    <p>&copy; Marc-Tech 2025 - Tous droits réservés.</p>
   </div>
 
-  <!-- Script sécurisé et obfusqué -->
   <script>
-    (function(){
-      const $ = [
-        "random", "substring", "@mailsac.com", "getElementById", "textContent", "messages", "length", "innerHTML", "<p>Aucun message pour l'instant.</p>", "forEach", "createElement", "className", "message",
-        "<p><strong>De :</strong> ", "from", "</p><p><strong>Sujet :</strong> ", "subject", "</p><button onclick=\"r('", "_id", "')\">Lire</button><div id=\"body-", "body-", "appendChild",
-        "headers", "Mailsac-Key", "k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537", "then", "json", "fetch", "/api/addresses/", "/messages", "g", "text", "pre"
-      ];
-      let e = () => Math[$[0]]().toString(36)[$[1]](2, 10) + $[2];
-      let m = e();
-      document[$[3]]("emailDisplay")[$[4]] = m;
+    const apiKey = 'k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537';
+    let tempEmail = generateEmail();
 
-      window.g = function() {
-        fetch("https://mailsac.com" + $[29] + m + $[30], {
-          [$[21]]: { [$[22]]: $[23] }
-        })[$[24]]($[25])[$[24]](msgs => {
-          let c = document[$[3]]("messages");
-          c[$[7]] = "";  // Clear the current messages
-          if (!msgs[$[6]]) {
-            c[$[7]] = $[8];  // Display "No messages yet" message
-            return;
-          }
-          msgs[$[9]](msg => {
-            let d = document[$[10]]("div");
-            d[$[11]] = $[12];
-            d[$[7]] = `<div class="message-box">
-                          <h4>De : ${msg[$[14]]}</h4>
-                          <p>Sujet : ${msg[$[16]]}</p>
-                          <button onclick="r('${msg[$[18]]}')">Lire</button>
-                        </div>`;
-            c[$[20]](d);
-          });
+    document.getElementById("emailDisplay").textContent = tempEmail;
+
+    function generateEmail() {
+      const random = Math.random().toString(36).substring(2, 10);
+      return `${random}@mailsac.com`;
+    }
+
+    function getMessages() {
+      fetch(`https://mailsac.com/api/addresses/${tempEmail}/messages`, {
+        headers: { 'Mailsac-Key': apiKey }
+      })
+      .then(res => res.json())
+      .then(messages => {
+        const container = document.getElementById("messages");
+        container.innerHTML = "";
+
+        if (!messages.length) {
+          container.innerHTML = "<p>Aucun message pour l'instant.</p>";
+          return;
+        }
+
+        messages.forEach(msg => {
+          const div = document.createElement("div");
+          div.className = "message";
+          div.innerHTML = `
+            <p><strong>De :</strong> ${msg.from}</p>
+            <p><strong>Sujet :</strong> ${msg.subject}</p>
+            <button onclick="readMessage('${msg._id}')">Lire</button>
+            <div id="body-${msg._id}"></div>
+          `;
+          container.appendChild(div);
         });
-      };
+      });
+    }
 
-      window.r = function(i) {
-        fetch(`https://mailsac.com/api/text/${m}/${i}`, {
-          [$[21]]: { [$[22]]: $[23] }
-        })[$[24]]($[31])[$[24]](txt => {
-          document[$[3]]($[19]+i)[$[7]] = `<pre>${txt}</pre>`;
-        });
-      };
+    function readMessage(id) {
+      fetch(`https://mailsac.com/api/text/${tempEmail}/${id}`, {
+        headers: { 'Mailsac-Key': apiKey }
+      })
+      .then(res => res.text())
+      .then(body => {
+        document.getElementById(`body-${id}`).innerHTML = `<pre>${body}</pre>`;
+      });
+    }
 
-      // Fonction pour copier l'email
-      window.copyEmail = function() {
-        const emailText = document.getElementById("emailDisplay").textContent;
-        navigator.clipboard.writeText(emailText)
-          .then(() => {
-            alert("Email copié dans le presse-papier !");
-          })
-          .catch(err => {
-            alert("Échec de la copie: " + err);
-          });
-      };
-    })();
+    function copyEmail() {
+      const email = document.getElementById("emailDisplay").textContent;
+      navigator.clipboard.writeText(email).then(() => {
+        alert("L'email a été copié dans le presse-papiers !");
+      }).catch(err => {
+        console.error('Erreur lors de la copie de l\'email: ', err);
+      });
+    }
   </script>
 </body>
 </html>
