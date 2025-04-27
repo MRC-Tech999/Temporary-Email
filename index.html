@@ -4,130 +4,24 @@
   <meta charset="UTF-8">
   <title>Temporary Email - Marc-Tech</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff;
-      color: #b00020;
-      padding: 30px;
-      line-height: 1.8;
-      letter-spacing: 0.7px;
-    }
-    h1 {
-      font-size: 2.5em;
-      color: #b00020;
-      margin-bottom: 30px;
-    }
-    .email-box {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-    .email {
-      font-weight: bold;
-      font-size: 1.4em;
-      color: #000;
-    }
-    button {
-      background-color: #b00020;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1em;
-      cursor: pointer;
-      margin-left: 10px;
-    }
-    button:hover {
-      background-color: #d32f2f;
-    }
-    .message {
-      background: #ffe6e6;
-      margin-top: 15px;
-      padding: 15px;
-      border: 1px solid #d32f2f;
-      border-radius: 8px;
-    }
-    pre {
-      background: #fff0f0;
-      padding: 12px;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-    .footer {
-      margin-top: 50px;
-      text-align: center;
-      font-size: 0.95em;
-      color: #555;
-    }
-    
-    /* Nouveau style pour le logo Instagram */
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #b00020; /* Définir la couleur du texte */
-      text-decoration: none;
-    }
-
-    .logo-icon {
-      color: #b00020;
-      font-size: 1.8rem;
-      animation: pulse 2s infinite; /* Animation pour pulser */
-    }
-
-    /* Animation glow */
-    @keyframes glow {
-      0% {
-        box-shadow: 0 0 5px #b00020;
-      }
-      50% {
-        box-shadow: 0 0 20px #b00020;
-      }
-      100% {
-        box-shadow: 0 0 5px #b00020;
-      }
-    }
-
-    .social-icons {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .social-icons img {
-      width: 80px;
-      height: auto;
-      transition: transform 0.2s ease;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    }
-
-    /* Animation de survol pour l'effet glow */
-    .social-icons img:hover {
-      transform: scale(1.05);
-      animation: glow 1s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.1);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
+    body{font-family:'Segoe UI',sans-serif;background:#fff;color:#b00020;padding:30px;line-height:1.8;letter-spacing:.7px}
+    h1{font-size:2.5em;color:#b00020;margin-bottom:30px;animation:titleAnimation 4s infinite}
+    @keyframes titleAnimation{0%{color:#b00020;transform:translateX(0)}25%{color:#d32f2f;transform:translateX(10px)}50%{color:#f44336;transform:translateX(-10px)}75%{color:#c2185b;transform:translateX(10px)}100%{color:#b00020;transform:translateX(0)}}
+    .email-box{font-size:1.2em;margin-bottom:30px}
+    .email{font-weight:bold;font-size:1.4em;color:#000}
+    button{background-color:#b00020;color:white;padding:12px 20px;border:none;border-radius:5px;font-size:1em;cursor:pointer;margin-left:10px}
+    button:hover{background-color:#d32f2f}
+    .message{background:#ffe6e6;margin-top:15px;padding:15px;border:1px solid #d32f2f;border-radius:8px}
+    pre{background:#fff0f0;padding:12px;border-radius:6px;overflow-x:auto}
+    .footer{margin-top:50px;text-align:center;font-size:.95em;color:#555}
+    .social-icons{display:flex;gap:20px;align-items:center;justify-content:center;margin-top:10px}
+    .social-icons img{width:80px;height:auto;transition:transform .2s ease;border-radius:10px;box-shadow:0 0 8px rgba(0,0,0,.2)}
+    .social-icons img:hover{transform:scale(1.05)}
   </style>
 </head>
 <body>
   <h1>Temporary Email</h1>
   
-  <!-- Email box with copy button -->
   <div class="email-box">
     Votre email temporaire : <span class="email" id="emailDisplay"></span>
     <button onclick="copyEmail()">Copier l'email</button>
@@ -135,14 +29,14 @@
   </div>
   <div id="messages"></div>
 
-  <!-- Instagram Logo -->
   <div class="socials">
-    <h3>Follow us on Instagram</h3>
+    <h3>Follow us on Social Media</h3>
     <div class="social-icons">
-      <!-- Instagram Logo -->
-      <a href="https://www.instagram.com/j.m.h.2024" target="_blank" class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="logo-icon">
-        Instagram
+      <a href="https://www.instagram.com/j.m.h.2024" target="_blank">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8j9M/AAAAmklEQVRIDbWVzXLTQBxHFf+eiAH7QXWgQXNva2xA0JcdVauQkzFqmeQ+XVm8h6FYmSBH9Hkz7gHzB1OUO2lgMK3XkcbpBhqf6tZdZmRVVZlz6z7XY7VV5vV/c5zkbZtd17Y2k3dMoc5jRtFYdDjsdpE3HfvJh+gG0gP5cX0gBeVauE2/kwm13lg6ld8llhNi67zH34crbD6V1pTztuDbkAB0UtprDt2O2MauAMg6v2LgA3vdoWiqObc59Og7a7QXlAFySjq0LUFzBi4ZtLy+j1TY9d3lFfi/8y7EXfgGbq39Bh0MQyJOnXJHjHfZUBJdWRiZ7rT+P/6a/yl8M62S5dcbgVb8XYeYpJbdU5ZqVQqIow0ykC44qBrXsZg7LwE/joVJYxLZaEqlOCceggDXfmbrgzfznWq4gwdmDsU2xU/IK/z2oHHz44JcNVyRt8l2yOCou0rWxRmwREwrSk4ZGEqVbdpdexGsCjckniKzF6hVm0yPp5UEeOQUr9Zc6pExGFjPRFezD6z4omzFHw2ZwP9E9D9VGk/sZ58oH8cwrNChHtA==">
+      </a>
+      <a href="https://whatsapp.com/channel/0029Vb6J7O684Om8DdNfvL2N" target="_blank">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zY2h...
       </a>
     </div>
   </div>
@@ -151,58 +45,17 @@
     Tous droits réservés © 2025 - Marc-Tech
   </div>
 
-  <!-- Script sécurisé et obfusqué -->
+  <!-- JavaScript obfusqué -->
   <script>
     (function(){
-      const $ = [
-        "random","substring","@mailsac.com","getElementById","textContent","messages","length","innerHTML","<p>Aucun message pour l'instant.</p>","forEach","createElement","className","message",
-        "<p><strong>De :</strong> ","from","</p><p><strong>Sujet :</strong> ","subject","</p><button onclick=\"r('","_id','')\">Lire</button><div id=\"body-","body-","appendChild",
-        "headers","Mailsac-Key","k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537","then","json","fetch","/api/addresses/","/messages","g","text","pre"
-      ];
-      let e = ()=>Math[$[0]]().toString(36)[$[1]](2,10)+$[2];
-      let m = e();
-      document[$[3]]("emailDisplay")[$[4]] = m;
-
-      window[$[30]] = function(){
-        fetch("https://mailsac.com"+$[29]+m+$[30], {
-          [$[21]]: { [$[22]]: $[23] }
-        })[$[24]]($[25])[$[24]](msgs => {
-          let c = document[$[3]]("messages");
-          c[$[7]] = "";
-          if (!msgs[$[6]]) {
-            c[$[7]] = $[8];
-            return;
-          }
-          msgs[$[9]](msg => {
-            let d = document[$[10]]("div");
-            d[$[11]] = $[12];
-            d[$[7]] = $[13]+msg[$[14]]+$[15]+msg[$[16]]+$[17]+msg[$[18]]+$[19];
-            c[$[20]](d);
-          });
-        });
-      };
-
-      window.r = function(i){
-        fetch(`https://mailsac.com/api/text/${m}/${i}`, {
-          [$[21]]: { [$[22]]: $[23] }
-        })[$[24]]($[31])[$[24]](txt => {
-          document[$[3]]($[19]+i)[$[7]] = `<${$[32]}>${txt}</${$[32]}>`;
-        });
-      };
-
-      // Fonction pour copier l'email
-      window.copyEmail = function() {
-        const emailText = document.getElementById("emailDisplay").textContent;
-        navigator.clipboard.writeText(emailText)
-          .then(() => {
-            alert("Email copié dans le presse-papier !");
-          })
-          .catch(err => {
-            alert("Échec de la copie: " + err);
-          });
-      };
+      var _0x9e27=["\x72\x61\x6E\x64\x6F\x6D","\x73\x75\x62\x73\x74\x72\x69\x6E\x67","\x40\x6D\x61\x69\x6C\x73\x61\x63\x2E\x63\x6F\x6D","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x74\x65\x78\x43\x6F\x6E\x74\x65\x6E\x74","\x6D\x65\x73\x73\x61\x67\x65\x73","\x6C\x65\x6E\x67\x74\x68","\x69\x6E\x6E\x65\x72\x48\x54\x4D\x4C","\x66\x6F\x72\x45\x61\x63\x68","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x73\x65\x6C\x66","\x64\x69\x73\x70\x6C\x61\x79"];
+      (function(){
+        var _0x7032=["\x63\x6C\x69\x70\x62\x6F\x61\x72\x64\x57\x72\x69\x74\x65\x74"];
+        var _0x5e4e=["\x77\x72\x69\x74\x65\x54\x65\x78\x74"];
+        var email=(_0x7032+(_0x5e4e+)).join('');
+      })();
     })();
   </script>
 </body>
-    </html>
+          </html>
   
