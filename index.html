@@ -126,12 +126,16 @@
 </head>
 <body>
   <h1>Temporary Email</h1>
+  
+  <!-- Email box with copy button -->
   <div class="email-box">
     Votre email temporaire : <span class="email" id="emailDisplay"></span>
+    <button onclick="copyEmail()">Copier l'email</button>
     <button onclick="g()">Actualiser</button>
   </div>
   <div id="messages"></div>
 
+  <!-- Social Icons -->
   <div class="socials">
     <h3>Follow us</h3>
     <div class="social-icons">
@@ -190,8 +194,20 @@
           document[$[3]]($[19]+i)[$[7]] = `<${$[32]}>${txt}</${$[32]}>`;
         });
       };
+
+      // Fonction pour copier l'email
+      window.copyEmail = function() {
+        const emailText = document.getElementById("emailDisplay").textContent;
+        navigator.clipboard.writeText(emailText)
+          .then(() => {
+            alert("Email copié dans le presse-papier !");
+          })
+          .catch(err => {
+            alert("Échec de la copie: " + err);
+          });
+      };
     })();
   </script>
 </body>
-    </html>
+  </html>
   
