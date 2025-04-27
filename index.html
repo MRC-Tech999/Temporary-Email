@@ -63,43 +63,38 @@
     button:hover {
       background-color: #d32f2f;
     }
-
-    /* Style de la boîte de réception (Inbox) */
-    .inbox {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 800px;
-      margin-top: 20px;
-      margin-bottom: 50px;
-    }
-
     .message-box {
-      background: #f9f9f9;
+      background: #ffe6e6;
+      margin-top: 15px;
       padding: 15px;
       border: 1px solid #d32f2f;
       border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 20px;
     }
-
     .message-box h4 {
       margin: 0;
       color: #b00020;
     }
-
     .message-box p {
-      margin: 5px 0;
+      margin: 10px 0;
       color: #555;
     }
-
     .message-box button {
       background-color: #008CBA;
     }
-
     .message-box button:hover {
       background-color: #005f73;
     }
 
+    pre {
+      background: #fff0f0;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
     .footer {
       margin-top: 50px;
       text-align: center;
@@ -126,7 +121,6 @@
     .social-icons img:hover {
       transform: scale(1.05);
     }
-
   </style>
 </head>
 <body>
@@ -139,9 +133,7 @@
   </div>
 
   <!-- Messages section (inbox) -->
-  <div class="inbox" id="messages">
-    <!-- Les messages seront injectés ici par JavaScript -->
-  </div>
+  <div id="messages"></div>
 
   <!-- Social Media Logos -->
   <div class="socials">
@@ -168,5 +160,56 @@
       const $ = [
         "random","substring","@mailsac.com","getElementById","textContent","messages","length","innerHTML","<p>Aucun message pour l'instant.</p>","forEach","createElement","className","message",
         "<p><strong>De :</strong> ","from","</p><p><strong>Sujet :</strong> ","subject","</p><button onclick=\"r('","_id','')\">Lire</button><div id=\"body-","body-","appendChild",
-        "headers","Mailsac-Key","k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537","then","json","fetch","/api/addresses/","/messages","g","text","_
-  
+        "headers","Mailsac-Key","k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537","then","json","fetch","/api/addresses/","/messages","g","text","pre"
+      ];
+      let e = () => Math[$[0]]().toString(36)[$[1]](2, 10) + $[2];
+      let m = e();
+      document[$[3]]("emailDisplay")[$[4]] = m;
+
+      window.g = function() {
+        fetch("https://mailsac.com" + $[29] + m + $[30], {
+          [$[21]]: { [$[22]]: $[23] }
+        })[$[24]]($[25])[$[24]](msgs => {
+          let c = document[$[3]]("messages");
+          c[$[7]] = "";
+          if (!msgs[$[6]]) {
+            c[$[7]] = $[8];
+            return;
+          }
+          msgs[$[9]](msg => {
+            let d = document[$[10]]("div");
+            d[$[11]] = $[12];
+            d[$[7]] = `<div class="message-box">
+                         <h4>De : ${msg[$[14]]}</h4>
+                         <p>Sujet : ${msg[$[16]]}</p>
+                         <button onclick="r('${msg[$[18]]}')">Lire</button>
+                       </div>`;
+            c[$[20]](d);
+          });
+        });
+      };
+
+      window.r = function(i) {
+        fetch(`https://mailsac.com/api/text/${m}/${i}`, {
+          [$[21]]: { [$[22]]: $[23] }
+        })[$[24]]($[31])[$[24]](txt => {
+          document[$[3]]($[19]+i)[$[7]] = `<pre>${txt}</pre>`;
+        });
+      };
+
+      // Fonction pour copier l'email
+      window.copyEmail = function() {
+        const emailText = document.getElementById("emailDisplay").textContent;
+        navigator.clipboard.writeText(emailText)
+          .then(() => {
+            alert("Email copié dans le presse-papier !");
+          })
+          .catch(err => {
+            alert("Échec de la copie: " + err);
+          });
+      };
+    })();
+  </script>
+</body>
+  </html>
+          
