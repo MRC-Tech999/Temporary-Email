@@ -2,72 +2,125 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Temporary Email - Mailsac</title>
+  <title>Temporary Email - Marc-Tech</title>
   <style>
-    body { font-family: Arial; padding: 20px; background: #f4f4f4; }
-    .email-box { margin-bottom: 20px; }
-    .email { font-weight: bold; }
-    button { padding: 10px 15px; }
-    .message { background: white; margin-top: 10px; padding: 10px; border: 1px solid #ccc; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      background: #fff;
+      color: #b00020;
+    }
+    h1 {
+      color: #b00020;
+    }
+    .email-box {
+      margin-bottom: 20px;
+    }
+    .email {
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    button {
+      background-color: #b00020;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d32f2f;
+    }
+    .message {
+      background: #ffe6e6;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #d32f2f;
+      border-radius: 5px;
+    }
+    pre {
+      background: #fff0f0;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .copyright {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #888;
+    }
   </style>
 </head>
 <body>
-  <h1>Temp Mail (via Mailsac)</h1>
+  <h1>Temporary Email</h1>
   <div class="email-box">
     Votre email temporaire : <span class="email" id="emailDisplay"></span>
-    <button onclick="getMessages()">Actualiser</button>
+    <button onclick="g()">Actualiser</button>
   </div>
   <div id="messages"></div>
 
+  <div class="copyright">
+    Ce site est privé. Tous droits réservés © 2025.  
+  </div>
+
+  <!-- Script protégé et signé Marc-Tech -->
   <script>
-    const apiKey = 'k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537';
-    let tempEmail = generateEmail();
+    // Anti-inspection console
+    setInterval(function () {
+      const before = new Date();
+      debugger;
+      const after = new Date();
+      if (after - before > 100) {
+        alert("Inspection détectée. Ce script appartient à Marc-Tech.");
+        window.location.href = "about:blank";
+      }
+    }, 1000);
 
-    document.getElementById("emailDisplay").textContent = tempEmail;
+    // Script fortement obfusqué signé Marc-Tech
+    (function(){
+      const _0x1a3b = [
+        "random","substring","@mailsac.com","getElementById","textContent","messages","length","innerHTML","<p>Aucun message pour l'instant.</p>","forEach","createElement","className","message",
+        "<p><strong>De :</strong> ","from","</p><p><strong>Sujet :</strong> ","subject","</p><button onclick=\"r('","_id','')\">Lire</button><div id=\"body-","body-","appendChild",
+        "headers","Mailsac-Key","k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537","then","json","fetch","/api/addresses/","/messages","g","text","pre","Marc-Tech © 2025","log"
+      ];
+      let email = function(){return Math[_0x1a3b[0]]().toString(36)[_0x1a3b[1]](2,10)+_0x1a3b[2];};
+      let mail = email();
+      document[_0x1a3b[3]]("emailDisplay")[_0x1a3b[4]] = mail;
 
-    function generateEmail() {
-      const random = Math.random().toString(36).substring(2, 10);
-      return `${random}@mailsac.com`;
-    }
+      console[_0x1a3b[36]](_0x1a3b[35]);
 
-    function getMessages() {
-      fetch(`https://mailsac.com/api/addresses/${tempEmail}/messages`, {
-        headers: { 'Mailsac-Key': apiKey }
-      })
-      .then(res => res.json())
-      .then(messages => {
-        const container = document.getElementById("messages");
-        container.innerHTML = "";
-
-        if (!messages.length) {
-          container.innerHTML = "<p>Aucun message pour l'instant.</p>";
-          return;
-        }
-
-        messages.forEach(msg => {
-          const div = document.createElement("div");
-          div.className = "message";
-          div.innerHTML = `
-            <p><strong>De :</strong> ${msg.from}</p>
-            <p><strong>Sujet :</strong> ${msg.subject}</p>
-            <button onclick="readMessage('${msg._id}')">Lire</button>
-            <div id="body-${msg._id}"></div>
-          `;
-          container.appendChild(div);
+      window[_0x1a3b[30]] = function(){
+        fetch("https://mailsac.com"+_0x1a3b[29]+mail+_0x1a3b[30], {
+          [_0x1a3b[21]]: {
+            [_0x1a3b[22]]: _0x1a3b[23]
+          }
+        })[_0x1a3b[24]](_0x1a3b[25])[_0x1a3b[24]](msgs => {
+          let c = document[_0x1a3b[3]]("messages");
+          c[_0x1a3b[7]] = "";
+          if (!msgs[_0x1a3b[6]]) {
+            c[_0x1a3b[7]] = _0x1a3b[8];
+            return;
+          }
+          msgs[_0x1a3b[9]](msg => {
+            let d = document[_0x1a3b[10]]("div");
+            d[_0x1a3b[11]] = _0x1a3b[12];
+            d[_0x1a3b[7]] = _0x1a3b[13] + msg[_0x1a3b[14]] + _0x1a3b[15] + msg[_0x1a3b[16]] + _0x1a3b[17] + msg[_0x1a3b[18]] + _0x1a3b[19];
+            c[_0x1a3b[20]](d);
+          });
         });
-      });
-    }
+      };
 
-    function readMessage(id) {
-      fetch(`https://mailsac.com/api/text/${tempEmail}/${id}`, {
-        headers: { 'Mailsac-Key': apiKey }
-      })
-      .then(res => res.text())
-      .then(body => {
-        document.getElementById(`body-${id}`).innerHTML = `<pre>${body}</pre>`;
-      });
-    }
+      window.r = function(id){
+        fetch(`https://mailsac.com/api/text/${mail}/${id}`, {
+          [_0x1a3b[21]]: {
+            [_0x1a3b[22]]: _0x1a3b[23]
+          }
+        })[_0x1a3b[24]](_0x1a3b[31])[_0x1a3b[24]](txt => {
+          document[_0x1a3b[3]](_0x1a3b[19]+id)[_0x1a3b[7]] = `<${_0x1a3b[32]}>`+txt+`</${_0x1a3b[32]}>`;
+        });
+      };
+    })();
   </script>
 </body>
-    </html>
-    
+  </html>
+  
