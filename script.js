@@ -57,4 +57,5 @@ async function getMessages(email) {
     } catch (error) {
         console.error('Error fetching messages:', error);
     }
-}
+    }
+            
