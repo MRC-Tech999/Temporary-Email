@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://temporary-email-black.vercel.app/sitemap.xml
