@@ -37,9 +37,62 @@
       </a>
     </div>
   </div>
+
   <script>
-    const aK='k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537';let tE=gE();document.getElementById("emailDisplay").textContent=tE;function gE(){const r=Math.random().toString(36).substring(2,10);return `${r}@mailsac.com`}function gM(){fetch(`https://mailsac.com/api/addresses/${tE}/messages`,{headers:{'Mailsac-Key':aK}}).then(res=>res.json()).then(m=>{const c=document.getElementById("messages");c.innerHTML="";if(!m.length){c.innerHTML="<p>Aucun message pour l'instant.</p>";return}m.forEach(m=>{const d=document.createElement("div");d.className="message";d.innerHTML=`<p><strong>De :</strong> ${m.from}</p><p><strong>Sujet :</strong> ${m.subject}</p><button onclick="rM('${m._id}')">Lire</button><div id="body-${m._id}"></div>`;c.appendChild(d)})})}function rM(i){fetch(`https://mailsac.com/api/text/${tE}/${i}`,{headers:{'Mailsac-Key':aK}}).then(res=>res.text()).then(b=>{document.getElementById(`body-${i}`).innerHTML=`<pre>${b}</pre>`})}function cE(){const e=document.getElementById("emailDisplay").textContent;navigator.clipboard.writeText(e).then(()=>{alert("L'email a été copié dans le presse-papiers !")}).catch(err=>{console.error('Erreur lors de la copie de l\'email: ',err)})}
+    (function() {
+      // Clé API Mailsac
+      const aK = 'k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537';
+
+      // Générer un email temporaire
+      let tE = gE();
+      document.getElementById("emailDisplay").textContent = tE;
+
+      // Fonction pour générer un email aléatoire
+      function gE() {
+        const r = Math.random().toString(36).substring(2, 10);
+        return `${r}@mailsac.com`;
+      }
+
+      // Actualiser les messages
+      window.gM = function() {
+        fetch(`https://mailsac.com/api/addresses/${tE}/messages`, { headers: { 'Mailsac-Key': aK } })
+          .then(res => res.json())
+          .then(m => {
+            const c = document.getElementById("messages");
+            c.innerHTML = "";
+            if (!m.length) {
+              c.innerHTML = "<p>Aucun message pour l'instant.</p>";
+              return;
+            }
+            m.forEach(m => {
+              const d = document.createElement("div");
+              d.className = "message";
+              d.innerHTML = `<p><strong>De :</strong> ${m.from}</p><p><strong>Sujet :</strong> ${m.subject}</p><button onclick="rM('${m._id}')">Lire</button><div id="body-${m._id}"></div>`;
+              c.appendChild(d);
+            });
+          });
+      }
+
+      // Lire un message
+      window.rM = function(i) {
+        fetch(`https://mailsac.com/api/text/${tE}/${i}`, { headers: { 'Mailsac-Key': aK } })
+          .then(res => res.text())
+          .then(b => {
+            document.getElementById(`body-${i}`).innerHTML = `<pre>${b}</pre>`;
+          });
+      }
+
+      // Copier l'email dans le presse-papiers
+      window.cE = function() {
+        const e = document.getElementById("emailDisplay").textContent;
+        navigator.clipboard.writeText(e).then(() => {
+          alert("L'email a été copié dans le presse-papiers !");
+        }).catch(err => {
+          console.error('Erreur lors de la copie de l\'email: ', err);
+        });
+      }
+    })();
   </script>
 </body>
-        </html>
-  
+                      </html>
+        
