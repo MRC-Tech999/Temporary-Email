@@ -34,8 +34,8 @@
   </div>
 
   <script>
-    const MAILSAC_KEY = 'k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537';
-    const RAPIDAPI_KEY = 'ab42dda446mshde4ba65d25b85fdp13b83ejsn3965c0519b7d';
+    const MAILSAC_KEY = 'k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537'; // visible publiquement
+    const RAPIDAPI_KEY = 'ab42dda446mshde4ba65d25b85fdp13b83ejsn3965c0519b7d'; // visible publiquement
 
     let tempEmail = generateEmail();
     document.getElementById('emailDisplay').textContent = tempEmail;
@@ -68,6 +68,10 @@
           div.innerHTML = `<p><strong>De:</strong> ${m.from}</p><p><strong>Sujet:</strong> ${m.subject}</p>`;
           container.appendChild(div);
         });
+      })
+      .catch(err => {
+        console.error("Erreur Mailsac:", err);
+        alert("Erreur lors du chargement des messages.");
       });
     }
 
@@ -102,7 +106,7 @@
         }
       })
       .catch(err => {
-        console.error(err);
+        console.error("Erreur d'envoi:", err);
         document.getElementById("sendStatus").innerHTML = "<p style='color:red;'>Erreur lors de l'envoi.</p>";
       });
     }
