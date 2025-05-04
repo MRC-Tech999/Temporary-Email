@@ -34,11 +34,15 @@
   </div>
 
   <script>
-    const MAILSAC_KEY = 'k_DEgCwZ8YXu6Xiy04LZ1T6xh346mqRysqy6MQAFRfdl6E8d'; // visible publiquement
-    const RAPIDAPI_KEY = 'ab42dda446mshde4ba65d25b85fdp13b83ejsn3965c0519b7d'; // visible publiquement
+    const MAILSAC_KEY = 'k_DEgCwZ8YXu6Xiy04LZ1T6xh346mqRysqy6MQAFRfdl6E8d';
+    const RAPIDAPI_KEY = 'ab42dda446mshde4ba65d25b85fdp13b83ejsn3965c0519b7d';
 
-    let tempEmail = generateEmail();
-    document.getElementById('emailDisplay').textContent = tempEmail;
+    let tempEmail = "";
+
+    window.onload = function() {
+      tempEmail = generateEmail();
+      document.getElementById('emailDisplay').textContent = tempEmail;
+    };
 
     function generateEmail() {
       return Math.random().toString(36).substring(2, 10) + '@mailsac.com';
@@ -47,7 +51,7 @@
     function copyEmail() {
       navigator.clipboard.writeText(tempEmail).then(() => {
         alert("Email copié !");
-      });
+      }).catch(err => alert("Erreur de copie : " + err));
     }
 
     function loadMessages() {
