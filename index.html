@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Temporary Email - MARC-Tech</title>
-  <meta name="description" content="Recevez un email temporaire gratuit en un clic avec Temporary Email - MARC-Tech.">
-  <meta name="keywords" content="email temporaire, temp mail, email jetable, marc-tech">
-  <meta name="author" content="Marc-Tech">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://temporary-email-black.vercel.app/">
-
+  <meta name="description" content="Recevez un email temporaire gratuit avec MARC-Tech." />
+  <link rel="canonical" href="https://temporary-email-black.vercel.app/" />
   <style>
     body {
       font-family: Arial, sans-serif;
+      padding: 20px;
       background: #f4f4f4;
       color: #333;
-      padding: 20px;
     }
     .email-box {
       background: #fff;
-      padding: 15px;
+      padding: 10px;
       border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       margin-bottom: 20px;
     }
     .email {
@@ -29,13 +25,13 @@
       color: #007bff;
     }
     button {
-      margin-top: 10px;
       padding: 10px 15px;
       background-color: #007bff;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 14px;
     }
     button:hover {
       background-color: #0056b3;
@@ -50,33 +46,41 @@
     .footer {
       margin-top: 40px;
       text-align: center;
-      font-size: 14px;
+      font-size: 12px;
       color: #777;
     }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .social-links a {
+      margin: 0 10px;
+      display: block;
+      width: 40px;
+      height: 40px;
+    }
     .social-links img {
-      width: 30px;
-      height: 30px;
-      margin: 10px;
+      width: 100%;
+      height: 100%;
     }
   </style>
 </head>
 <body>
-
-  <h1>Temp Mail - MARC-Tech</h1>
-
+  <h1>Temp Mail (via Marc-Tech)</h1>
   <div class="email-box">
-    <p>Email temporaire : <span class="email" id="emailDisplay">Chargement...</span></p>
-    <button onclick="loadInbox()">Actualiser la boîte de réception</button>
+    <p>Votre email temporaire : <span class="email" id="emailDisplay">Chargement...</span></p>
+    <button onclick="refreshMessages()">Afficher les messages</button>
     <button onclick="copyEmail()">Copier l'email</button>
   </div>
-
   <div id="messages"></div>
 
   <div class="footer">
     <p>&copy; Marc-Tech 2025 - Tous droits réservés.</p>
+    <p>Suivez-nous :</p>
     <div class="social-links">
       <a href="https://www.instagram.com/j.m.h.2024" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
       </a>
     </div>
   </div>
@@ -84,44 +88,13 @@
   <script>
     let currentEmail = "";
 
-    async function getTempEmail() {
+    // Charger l’email à l’ouverture
+    window.onload = async function () {
       const res = await fetch('/api/email');
       const data = await res.json();
       currentEmail = data.email;
       document.getElementById('emailDisplay').textContent = currentEmail;
-    }
-
-    async function loadInbox() {
-      if (!currentEmail) return;
-
-      const res = await fetch(`https://mailsac.com/api/addresses/${currentEmail}/messages`, {
-        headers: { 'Mailsac-Key': 'TON_API_KEY_TEMP' } // Ne laisse pas la clé ici en prod
-      });
-      const messages = await res.json();
-
-      const container = document.getElementById("messages");
-      container.innerHTML = "";
-
-      if (!messages.length) {
-        container.innerHTML = "<p>Aucun message reçu.</p>";
-        return;
-      }
-
-      messages.forEach(msg => {
-        const div = document.createElement("div");
-        div.className = "message";
-        div.innerHTML = `<strong>De :</strong> ${msg.from}<br><strong>Sujet :</strong> ${msg.subject}<br><button onclick="readMessage('${msg._id}')">Lire</button><div id="body-${msg._id}"></div>`;
-        container.appendChild(div);
-      });
-    }
-
-    async function readMessage(id) {
-      const res = await fetch(`https://mailsac.com/api/text/${currentEmail}/${id}`, {
-        headers: { 'Mailsac-Key': 'TON_API_KEY_TEMP' }
-      });
-      const text = await res.text();
-      document.getElementById(`body-${id}`).innerHTML = `<pre>${text}</pre>`;
-    }
+    };
 
     function copyEmail() {
       navigator.clipboard.writeText(currentEmail).then(() => {
@@ -129,8 +102,43 @@
       });
     }
 
-    getTempEmail();
-  </script>
+    async function refreshMessages() {
+      const res = await fetch(`https://mailsac.com/api/addresses/${currentEmail}/messages`, {
+        headers: {
+          'Mailsac-Key': 'k_7zCBw6nPlhRCS4HNlYSQH8I7hidMGtcU8SpcPX1yDg66e4'
+        }
+      });
+      const messages = await res.json();
+      const container = document.getElementById("messages");
+      container.innerHTML = "";
 
+      if (!messages.length) {
+        container.innerHTML = "<p>Aucun message pour l'instant.</p>";
+        return;
+      }
+
+      messages.forEach(m => {
+        const div = document.createElement("div");
+        div.className = "message";
+        div.innerHTML = `
+          <p><strong>De :</strong> ${m.from}</p>
+          <p><strong>Sujet :</strong> ${m.subject}</p>
+          <button onclick="readMessage('${m._id}')">Lire</button>
+          <div id="body-${m._id}"></div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    async function readMessage(id) {
+      const res = await fetch(`https://mailsac.com/api/text/${currentEmail}/${id}`, {
+        headers: {
+          'Mailsac-Key': 'k_7zCBw6nPlhRCS4HNlYSQH8I7hidMGtcU8SpcPX1yDg66e4'
+        }
+      });
+      const body = await res.text();
+      document.getElementById(`body-${id}`).innerHTML = `<pre>${body}</pre>`;
+    }
+  </script>
 </body>
 </html>
