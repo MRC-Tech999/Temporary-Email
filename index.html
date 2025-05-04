@@ -5,12 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Temp Mail + Envoi - MARC-Tech</title>
   <style>
-    body { font-family: Arial; background: #f0f0f0; padding: 20px; }
-    .email-box, .send-box { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
-    .email { color: #007bff; font-weight: bold; }
-    button { background: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
-    input, textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
-    .message { background: #eef; padding: 10px; border-radius: 5px; margin-top: 10px; }
+    body {
+      font-family: Arial;
+      background: #f0f0f0;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .email-box, .send-box {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .email {
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .message {
+      background: #eef;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .instagram-link img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .instagram-link img:hover {
+      transform: scale(1.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #777;
+    }
   </style>
 </head>
 <body>
@@ -32,6 +98,16 @@
     <button onclick="sendEmail()">Envoyer</button>
     <div id="sendStatus"></div>
   </div>
+
+  <div class="social-footer">
+    <a class="instagram-link" href="https://www.instagram.com/j.m.h.2024" target="_blank" title="Mon compte Instagram">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2025 MARC-Tech. Tous droits réservés.
+  </footer>
 
   <script>
     const MAILSAC_KEY = 'k_SlFHIkRTITLDKtpxYoQ8JX0ua9pnKIyBgQ0537';
