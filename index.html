@@ -3,19 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Temp Mail + Envoi - MARC-Tech</title>
+  <title>Email Temporaire by Marc-Tech</title>
   <style>
-    body { font-family: Arial; background: #f0f0f0; padding: 20px; }
-    .email-box, .send-box { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
-    .email { color: #007bff; font-weight: bold; }
-    button { background: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
-    input, textarea { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; }
-    .message { background: #eef; padding: 10px; border-radius: 5px; margin-top: 10px; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-instagram {
+      width: 45px;
+      height: 45px;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    .email-box {
+      background: #ffffff10;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .email {
+      color: #ffcc00;
+      font-weight: bold;
+    }
+
+    button {
+      background: #ffcc00;
+      color: #000;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .message-preview, .full-message {
+      background: #ffffff15;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .message-preview:hover {
+      background: #ffffff30;
+    }
+
+    .full-message {
+      white-space: pre-wrap;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
 
-  <h2>Email Temporaire (MARC-Tech)</h2>
+  <div class="header">
+    <h2>Email Temporaire by Marc-Tech</h2>
+    <a href="https://instagram.com/j.m.h.2024" target="_blank">
+      <img src="https://i.postimg.cc/mgq4VSLg/IMG-9227.jpg" alt="Instagram" class="logo-instagram" />
+    </a>
+  </div>
+
   <div class="email-box">
     <p>Votre email temporaire : <span class="email" id="emailDisplay">chargement...</span></p>
     <button onclick="copyEmail()">Copier l’email</button>
@@ -24,22 +89,11 @@
 
   <div id="messages"></div>
 
-  <div class="send-box">
-    <h3>Envoyer un Email</h3>
-    <input type="email" id="toEmail" placeholder="Destinataire (ex: destinataire@mail.com)" required>
-    <input type="text" id="subject" placeholder="Sujet" required>
-    <textarea id="body" placeholder="Message..." rows="4" required></textarea>
-    <button onclick="sendEmail()">Envoyer</button>
-    <div id="sendStatus"></div>
-  </div>
-
   <script>
     const MAILSAC_KEY = 'k_DEgCwZ8YXu6Xiy04LZ1T6xh346mqRysqy6MQAFRfdl6E8d';
-    const RAPIDAPI_KEY = 'ab42dda446mshde4ba65d25b85fdp13b83ejsn3965c0519b7d';
-
     let tempEmail = "";
 
-    window.onload = function() {
+    window.onload = () => {
       tempEmail = generateEmail();
       document.getElementById('emailDisplay').textContent = tempEmail;
     };
@@ -49,18 +103,19 @@
     }
 
     function copyEmail() {
-      navigator.clipboard.writeText(tempEmail).then(() => {
-        alert("Email copié !");
-      }).catch(err => alert("Erreur de copie : " + err));
+      navigator.clipboard.writeText(tempEmail)
+        .then(() => alert("Email copié !"))
+        .catch(err => alert("Erreur de copie : " + err));
     }
 
     function loadMessages() {
+      const container = document.getElementById("messages");
+      container.innerHTML = "<p>Chargement des messages...</p>";
       fetch(`https://mailsac.com/api/addresses/${tempEmail}/messages`, {
         headers: { 'Mailsac-Key': MAILSAC_KEY }
       })
       .then(res => res.json())
       .then(messages => {
-        const container = document.getElementById("messages");
         container.innerHTML = "";
         if (!messages.length) {
           container.innerHTML = "<p>Aucun message reçu.</p>";
@@ -68,8 +123,12 @@
         }
         messages.forEach(m => {
           const div = document.createElement("div");
-          div.className = "message";
-          div.innerHTML = `<p><strong>De:</strong> ${m.from}</p><p><strong>Sujet:</strong> ${m.subject}</p>`;
+          div.className = "message-preview";
+          div.innerHTML = `
+            <p><strong>De :</strong> ${m.from}</p>
+            <p><strong>Sujet :</strong> ${m.subject}</p>
+          `;
+          div.onclick = () => viewMessage(m._id);
           container.appendChild(div);
         });
       })
@@ -79,39 +138,21 @@
       });
     }
 
-    function sendEmail() {
-      const sendTo = document.getElementById("toEmail").value;
-      const subject = document.getElementById("subject").value;
-      const body = document.getElementById("body").value;
-
-      const payload = {
-        sendTo: sendTo,
-        replyTo: tempEmail,
-        isHtml: false,
-        title: subject,
-        body: body
-      };
-
-      fetch("https://sendmail-ultimate-email-sender.p.rapidapi.com/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-rapidapi-host": "sendmail-ultimate-email-sender.p.rapidapi.com",
-          "x-rapidapi-key": RAPIDAPI_KEY
-        },
-        body: JSON.stringify(payload)
+    function viewMessage(messageId) {
+      fetch(`https://mailsac.com/api/text/${tempEmail}/${messageId}`, {
+        headers: { 'Mailsac-Key': MAILSAC_KEY }
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          document.getElementById("sendStatus").innerHTML = "<p style='color:green;'>Email envoyé avec succès !</p>";
-        } else {
-          document.getElementById("sendStatus").innerHTML = "<p style='color:red;'>Échec de l'envoi.</p>";
-        }
+      .then(res => res.text())
+      .then(content => {
+        const container = document.getElementById("messages");
+        const fullDiv = document.createElement("div");
+        fullDiv.className = "full-message";
+        fullDiv.textContent = content || "Contenu vide.";
+        container.appendChild(fullDiv);
       })
       .catch(err => {
-        console.error("Erreur d'envoi:", err);
-        document.getElementById("sendStatus").innerHTML = "<p style='color:red;'>Erreur lors de l'envoi.</p>";
+        console.error("Erreur message complet:", err);
+        alert("Impossible d'afficher le message.");
       });
     }
   </script>
